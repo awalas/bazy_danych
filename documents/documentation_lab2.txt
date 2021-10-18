@@ -1,0 +1,3 @@
+Wczytanie danych
+Filtracja danych aby id zawierało string '2010' - są to dane 2010 roku
+Zamiana wartości -9999 na NaN
