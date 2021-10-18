@@ -1,3 +1,29 @@
-Wczytanie danych
-Filtracja danych aby id zawierało string '2010' - są to dane 2010 roku
-Zamiana wartości -9999 na NaN
+Wymagania wstępne.
+W celu analizy danych pogodowych wymagany jest język programowania python wraz z pakietem pandas, numpy oraz matplotlib. Pobranie odpowiednich pakietów jest zrealizowane za pomocą instrukcji import.
+
+Zawartość folderów
+- original_data - dane oryginalne, pobrane z udostępnionego źródła
+- documents - dokumentacja
+- analysis - dane przetworzone
+- command_files - instrukcje niezbędne do powtórzenia analizy przeprowadzonej na danych
+
+
+Etapy pracy:
+1. Wczytanie danych.
+Należy pobrać plik weather.txt, do zmiennej path należy podać ścieżkę, w której znajduje się wspomniany plik, zmienna width oznacza długość poszczególnych wyrazów/danych- id, roku, miesiąca, typu danych. Następnie przy wykorzystaniu funkcji pakietu pandas dane zostają wczytane.
+
+2. Usunięcie wartości 'S','I','O' oraz NaN.
+Wartości 'S','I','O' oraz NaN nie zawierają informacji o temperaturze, stąd należy je usunąć. Dane te występują co 2 kolumnę, stąd wykorzystując pętlę for oraz funkcję drop pakietu pandas zostały one usunięte. Atrybut axis funkcji drop należy ustawić na 1, aby pod uwagę brane były kolumny.
+Wartości -9999 oznaczają dane zgubione lub brak pomiaru danych. Zostaną one odfiltrowane w dalszej części.
+
+3. Zmiana nazw kolumn.
+Wykorzystując pętlę for stworzony zostaje słownik zawierający indeksy do zmiany oraz odpowiadające im nowe etykiety dla poszczególnych kolumn. Korzystając z funkcji rename pakietu pandas dokonano zmiany etykiet w poszczególnych kolumnach. Jako argument columns należy podac stworzony wcześniej słownik.
+
+4. Filtracja danych- 5 miesięcy z 2010 roku.
+Do funkcji loc pakietu pandas należy przekazać porównanie, w którym podaje się nazwę kolumny danych na podstawie, którego dokonuje się porównania oraz wartość porównywaną. Dane zostają odfiltrowane ze względu na rok oraz miesiąc- 5 ostatnich miesięcy 2010 roku.
+
+5. Wyświetlenie maksymalnej temperatury w wybranym miesiącu.
+Korzystając z logiki opisanej w punkcie 4 wyróżnia się maksymalną temperaturę dla konkretnego miesiąca. Następnie korzystając z slicingu dane dotyczące temperatury w konkretnych dniach zostają przypisane do zmiennej temp, która zostaje zamieniona na listę. Pętla for iteruje po elementach listy temp i zamienia wartości -9999 na wartości NaN (nie zostaną one wyświetlone). Następnie funkcja scatter wyświetla maksymalne temperatury dla poszczególnych dni, z pominięciem dni, w których danych nie zebrano. 
+
+6. Zapis danych do pliku.
+Funkcja to_csv realizuje zapis do pliku danych końcowych. Jako parametr nalezy podać ścieżkę wraz z nazwą pliku.
